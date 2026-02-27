@@ -3,6 +3,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Toaster } from "@/components/ui/sonner";
+import { Header } from "@/components/layout/header";
 
 export default async function LocaleLayout({
   children,
@@ -21,7 +22,10 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <div className="min-h-screen">
-        {children}
+        <Header />
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 py-6">
+          {children}
+        </main>
       </div>
       <Toaster />
     </NextIntlClientProvider>
