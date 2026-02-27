@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowLeft, Save, Loader2 } from "lucide-react";
+import { ArrowLeft, Save, Loader2, FileText } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +26,13 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { FormRenderer, hasStructuredForm } from "@/components/evaluation/forms/form-renderer";
+import {
+  FormRenderer,
+  hasStructuredForm,
+  isQualitativeFlowItem,
+} from "@/components/evaluation/forms/form-renderer";
+import { FormPY09to11Qualitative } from "@/components/evaluation/forms/form-py09-11-qualitative";
+import { PlanReferencePanel } from "@/components/evaluation/plan-reference-panel";
 import type { Serialized } from "@/lib/serialize";
 
 interface PlanOption {
@@ -62,6 +68,7 @@ interface NewReportFormProps {
 
 export function NewReportForm({ plans, initialTemplates }: NewReportFormProps) {
   const t = useTranslations("reports");
+  const tEval = useTranslations("evaluation");
   const locale = useLocale();
   const router = useRouter();
 
@@ -70,9 +77,13 @@ export function NewReportForm({ plans, initialTemplates }: NewReportFormProps) {
   const [title, setTitle] = useState("");
   const [periodStart, setPeriodStart] = useState("");
   const [periodEnd, setPeriodEnd] = useState("");
-  const [templates, setTemplates] = useState<Serialized<Template[]>>(initialTemplates);
+  const [templates, setTemplates] =
+    useState<Serialized<Template[]>>(initialTemplates);
   const [itemContents, setItemContents] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
+  const [openRefPanels, setOpenRefPanels] = useState<Record<string, boolean>>(
+    {}
+  );
 
   const selectedPlan = plans.find((p) => p.id === selectedPlanId);
 
@@ -104,6 +115,47 @@ export function NewReportForm({ plans, initialTemplates }: NewReportFormProps) {
     []
   );
 
+  // Toggle plan reference panel
+  const toggleRefPanel = useCallback((itemCode: string) => {
+    setOpenRefPanels((prev) => ({ ...prev, [itemCode]: !prev[itemCode] }));
+  }, []);
+
+  // Separate regular templates from qualitative flow templates (PY-09~11)
+  const regularTemplates = useMemo(
+    () => templates.filter((tpl) => !isQualitativeFlowItem(tpl.itemCode)),
+    [templates]
+  );
+
+  const qualitativeTemplates = useMemo(
+    () =>
+      templates
+        .filter((tpl) => isQualitativeFlowItem(tpl.itemCode))
+        .sort((a, b) => a.sortOrder - b.sortOrder),
+    [templates]
+  );
+
+  // Build qualitative flow items for FormPY09to11Qualitative
+  const qualitativeFlowItems = useMemo(
+    () =>
+      qualitativeTemplates.map((tpl) => ({
+        itemCode: tpl.itemCode,
+        templateId: tpl.id,
+        content: itemContents[tpl.id] || "",
+      })),
+    [qualitativeTemplates, itemContents]
+  );
+
+  // Handle onChange from qualitative flow (maps itemCode back to templateId)
+  const handleQualitativeChange = useCallback(
+    (itemCode: string, content: string) => {
+      const tpl = qualitativeTemplates.find((t) => t.itemCode === itemCode);
+      if (tpl) {
+        setItemContents((prev) => ({ ...prev, [tpl.id]: content }));
+      }
+    },
+    [qualitativeTemplates]
+  );
+
   const handleSave = async () => {
     if (!selectedPlanId || !title || !periodStart || !periodEnd) {
       toast.error("Vui lòng điền đầy đủ thông tin");
@@ -127,7 +179,8 @@ export function NewReportForm({ plans, initialTemplates }: NewReportFormProps) {
           title,
           periodStart,
           periodEnd,
-          organizationId: selectedPlan?.organizationId ?? selectedPlan?.organization?.id,
+          organizationId:
+            selectedPlan?.organizationId ?? selectedPlan?.organization?.id,
           items,
         }),
       });
@@ -233,12 +286,29 @@ export function NewReportForm({ plans, initialTemplates }: NewReportFormProps) {
           <Separator />
           <h2 className="text-lg font-semibold">{t("evaluationItems")}</h2>
 
-          {templates.map((tpl) => (
+          {/* Regular items: PY-01 ~ PY-08 */}
+          {regularTemplates.map((tpl) => (
             <Card key={tpl.id}>
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Badge variant="outline">{tpl.itemCode}</Badge>
-                  <CardTitle className="text-base">{tpl.titleVi}</CardTitle>
+                  <CardTitle className="text-base flex-1">
+                    {tpl.titleVi}
+                  </CardTitle>
+                  {/* Plan reference toggle button */}
+                  <Button
+                    variant={openRefPanels[tpl.itemCode] ? "secondary" : "ghost"}
+                    size="xs"
+                    onClick={() => toggleRefPanel(tpl.itemCode)}
+                    className="shrink-0"
+                  >
+                    <FileText className="h-3 w-3" />
+                    <span className="hidden sm:inline text-[11px]">
+                      {openRefPanels[tpl.itemCode]
+                        ? tEval("hidePlanReference")
+                        : tEval("showPlanReference")}
+                    </span>
+                  </Button>
                 </div>
                 {tpl.descriptionVi && (
                   <CardDescription className="whitespace-pre-wrap">
@@ -246,7 +316,17 @@ export function NewReportForm({ plans, initialTemplates }: NewReportFormProps) {
                   </CardDescription>
                 )}
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-3">
+                {/* Plan reference panel */}
+                {openRefPanels[tpl.itemCode] && selectedPlanId && (
+                  <PlanReferencePanel
+                    planId={selectedPlanId}
+                    itemCode={tpl.itemCode}
+                    onClose={() => toggleRefPanel(tpl.itemCode)}
+                  />
+                )}
+
+                {/* Form or textarea */}
                 {hasStructuredForm(tpl.itemCode) ? (
                   <FormRenderer
                     itemCode={tpl.itemCode}
@@ -265,6 +345,30 @@ export function NewReportForm({ plans, initialTemplates }: NewReportFormProps) {
               </CardContent>
             </Card>
           ))}
+
+          {/* PY-09 ~ PY-11: Qualitative flow component */}
+          {qualitativeTemplates.length > 0 && (
+            <Card>
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <Badge variant="outline">PY-09 ~ PY-11</Badge>
+                  <CardTitle className="text-base flex-1">
+                    Đánh giá định tính (Điều 55.9 ~ 55.11)
+                  </CardTitle>
+                </div>
+                <CardDescription>
+                  Khó khăn, vướng mắc — Đề xuất giải pháp — Kiến nghị điều chỉnh
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <FormPY09to11Qualitative
+                  items={qualitativeFlowItems}
+                  onChange={handleQualitativeChange}
+                  readOnly={false}
+                />
+              </CardContent>
+            </Card>
+          )}
         </>
       )}
 

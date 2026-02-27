@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowLeft, Save, Loader2 } from "lucide-react";
+import { ArrowLeft, Save, Loader2, FileText } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,7 +19,13 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { FormRenderer, hasStructuredForm } from "@/components/evaluation/forms/form-renderer";
+import {
+  FormRenderer,
+  hasStructuredForm,
+  isQualitativeFlowItem,
+} from "@/components/evaluation/forms/form-renderer";
+import { FormPY09to11Qualitative } from "@/components/evaluation/forms/form-py09-11-qualitative";
+import { PlanReferencePanel } from "@/components/evaluation/plan-reference-panel";
 import type { Serialized } from "@/lib/serialize";
 import type { ReportDetail } from "@/lib/queries/reports";
 
@@ -33,6 +39,7 @@ interface ItemUpdate {
 
 export function EditReportForm({ report }: { report: Report }) {
   const t = useTranslations("reports");
+  const tEval = useTranslations("evaluation");
   const locale = useLocale();
   const router = useRouter();
 
@@ -53,10 +60,59 @@ export function EditReportForm({ report }: { report: Report }) {
     }
   );
   const [saving, setSaving] = useState(false);
+  const [openRefPanels, setOpenRefPanels] = useState<Record<string, boolean>>(
+    {}
+  );
 
   const handleItemChange = useCallback((itemId: string, content: string) => {
     setItemContents((prev) => ({ ...prev, [itemId]: content }));
   }, []);
+
+  // Toggle plan reference panel
+  const toggleRefPanel = useCallback((itemCode: string) => {
+    setOpenRefPanels((prev) => ({ ...prev, [itemCode]: !prev[itemCode] }));
+  }, []);
+
+  // Separate regular items from qualitative flow items (PY-09~11)
+  const regularItems = useMemo(
+    () =>
+      report.items.filter(
+        (item) => !isQualitativeFlowItem(item.template.itemCode)
+      ),
+    [report.items]
+  );
+
+  const qualitativeItems = useMemo(
+    () =>
+      report.items
+        .filter((item) => isQualitativeFlowItem(item.template.itemCode))
+        .sort((a, b) => a.sortOrder - b.sortOrder),
+    [report.items]
+  );
+
+  // Build qualitative flow items for FormPY09to11Qualitative
+  const qualitativeFlowItems = useMemo(
+    () =>
+      qualitativeItems.map((item) => ({
+        itemCode: item.template.itemCode,
+        templateId: item.template.id,
+        content: itemContents[item.id] || "",
+      })),
+    [qualitativeItems, itemContents]
+  );
+
+  // Handle onChange from qualitative flow (maps itemCode back to item.id)
+  const handleQualitativeChange = useCallback(
+    (itemCode: string, content: string) => {
+      const item = qualitativeItems.find(
+        (i) => i.template.itemCode === itemCode
+      );
+      if (item) {
+        setItemContents((prev) => ({ ...prev, [item.id]: content }));
+      }
+    },
+    [qualitativeItems]
+  );
 
   const handleSave = async () => {
     setSaving(true);
@@ -107,7 +163,8 @@ export function EditReportForm({ report }: { report: Report }) {
         <CardHeader>
           <CardTitle>{t("reportTitle")}</CardTitle>
           <CardDescription>
-            {report.plan?.nameVi} ({report.plan?.periodStart}–{report.plan?.periodEnd})
+            {report.plan?.nameVi} ({report.plan?.periodStart}–
+            {report.plan?.periodEnd})
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -140,12 +197,35 @@ export function EditReportForm({ report }: { report: Report }) {
       <Separator />
       <h2 className="text-lg font-semibold">{t("evaluationItems")}</h2>
 
-      {report.items.map((item) => (
+      {/* Regular items: PY-01 ~ PY-08 */}
+      {regularItems.map((item) => (
         <Card key={item.id}>
           <CardHeader>
             <div className="flex items-center gap-2">
               <Badge variant="outline">{item.template.itemCode}</Badge>
-              <CardTitle className="text-base">{item.template.titleVi}</CardTitle>
+              <CardTitle className="text-base flex-1">
+                {item.template.titleVi}
+              </CardTitle>
+              {/* Plan reference toggle button */}
+              {report.planId && (
+                <Button
+                  variant={
+                    openRefPanels[item.template.itemCode]
+                      ? "secondary"
+                      : "ghost"
+                  }
+                  size="xs"
+                  onClick={() => toggleRefPanel(item.template.itemCode)}
+                  className="shrink-0"
+                >
+                  <FileText className="h-3 w-3" />
+                  <span className="hidden sm:inline text-[11px]">
+                    {openRefPanels[item.template.itemCode]
+                      ? tEval("hidePlanReference")
+                      : tEval("showPlanReference")}
+                  </span>
+                </Button>
+              )}
             </div>
             {item.template.descriptionVi && (
               <CardDescription className="whitespace-pre-wrap">
@@ -153,7 +233,17 @@ export function EditReportForm({ report }: { report: Report }) {
               </CardDescription>
             )}
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-3">
+            {/* Plan reference panel */}
+            {openRefPanels[item.template.itemCode] && report.planId && (
+              <PlanReferencePanel
+                planId={report.planId}
+                itemCode={item.template.itemCode}
+                onClose={() => toggleRefPanel(item.template.itemCode)}
+              />
+            )}
+
+            {/* Form or textarea */}
             {hasStructuredForm(item.template.itemCode) ? (
               <FormRenderer
                 itemCode={item.template.itemCode}
@@ -172,6 +262,30 @@ export function EditReportForm({ report }: { report: Report }) {
           </CardContent>
         </Card>
       ))}
+
+      {/* PY-09 ~ PY-11: Qualitative flow component */}
+      {qualitativeItems.length > 0 && (
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline">PY-09 ~ PY-11</Badge>
+              <CardTitle className="text-base flex-1">
+                Đánh giá định tính (Điều 55.9 ~ 55.11)
+              </CardTitle>
+            </div>
+            <CardDescription>
+              Khó khăn, vướng mắc — Đề xuất giải pháp — Kiến nghị điều chỉnh
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <FormPY09to11Qualitative
+              items={qualitativeFlowItems}
+              onChange={handleQualitativeChange}
+              readOnly={false}
+            />
+          </CardContent>
+        </Card>
+      )}
 
       {/* Save Button */}
       <div className="flex justify-end gap-2">

@@ -36,7 +36,13 @@ export function FormRenderer({ itemCode, value, onChange, readOnly = false }: Fo
   }
 }
 
-// Helper to check if an itemCode has a structured form
+// Helper to check if an itemCode has a structured form (PY-02~PY-08 individual forms)
 export function hasStructuredForm(itemCode: string): boolean {
   return ["PY-02", "PY-03", "PY-04", "PY-05", "PY-06", "PY-07", "PY-08"].includes(itemCode);
+}
+
+// PY-09~PY-11 use a combined qualitative flow component (FormPY09to11Qualitative)
+// They should be grouped together and rendered as a single flow, not individually.
+export function isQualitativeFlowItem(itemCode: string): boolean {
+  return ["PY-09", "PY-10", "PY-11"].includes(itemCode);
 }

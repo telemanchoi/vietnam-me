@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeft, Edit, FileText, Building2, Calendar } from "lucide-react";
@@ -13,7 +14,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { FormRenderer, hasStructuredForm } from "@/components/evaluation/forms/form-renderer";
+import {
+  FormRenderer,
+  hasStructuredForm,
+  isQualitativeFlowItem,
+} from "@/components/evaluation/forms/form-renderer";
+import { FormPY09to11Qualitative } from "@/components/evaluation/forms/form-py09-11-qualitative";
 import type { Serialized } from "@/lib/serialize";
 import type { ReportDetail as ReportDetailType } from "@/lib/queries/reports";
 
@@ -31,6 +37,34 @@ export function ReportDetail({ report }: { report: Report }) {
   const t = useTranslations("reports");
   const locale = useLocale();
 
+  // Separate regular items from qualitative flow items (PY-09~11)
+  const regularItems = useMemo(
+    () =>
+      report.items.filter(
+        (item) => !isQualitativeFlowItem(item.template.itemCode)
+      ),
+    [report.items]
+  );
+
+  const qualitativeItems = useMemo(
+    () =>
+      report.items
+        .filter((item) => isQualitativeFlowItem(item.template.itemCode))
+        .sort((a, b) => a.sortOrder - b.sortOrder),
+    [report.items]
+  );
+
+  // Build qualitative flow items for read-only display
+  const qualitativeFlowItems = useMemo(
+    () =>
+      qualitativeItems.map((item) => ({
+        itemCode: item.template.itemCode,
+        templateId: item.template.id,
+        content: item.content || "",
+      })),
+    [qualitativeItems]
+  );
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -44,9 +78,14 @@ export function ReportDetail({ report }: { report: Report }) {
           <h1 className="text-2xl font-bold leading-tight">{report.title}</h1>
           <div className="flex flex-wrap gap-2 mt-2">
             <Badge variant="outline">
-              {report.reportType === "PERIODIC_5Y" ? t("periodic") : t("adHoc")}
+              {report.reportType === "PERIODIC_5Y"
+                ? t("periodic")
+                : t("adHoc")}
             </Badge>
-            <Badge variant="secondary" className={STATUS_COLORS[report.status] ?? ""}>
+            <Badge
+              variant="secondary"
+              className={STATUS_COLORS[report.status] ?? ""}
+            >
               {t(`status.${report.status}`)}
             </Badge>
           </div>
@@ -94,7 +133,9 @@ export function ReportDetail({ report }: { report: Report }) {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardDescription>{t("periodStart")} – {t("periodEnd")}</CardDescription>
+            <CardDescription>
+              {t("periodStart")} – {t("periodEnd")}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
@@ -112,12 +153,15 @@ export function ReportDetail({ report }: { report: Report }) {
       <Separator />
       <h2 className="text-lg font-semibold">{t("evaluationItems")}</h2>
 
-      {report.items.map((item) => (
+      {/* Regular items: PY-01 ~ PY-08 */}
+      {regularItems.map((item) => (
         <Card key={item.id}>
           <CardHeader>
             <div className="flex items-center gap-2">
               <Badge variant="outline">{item.template.itemCode}</Badge>
-              <CardTitle className="text-base">{item.template.titleVi}</CardTitle>
+              <CardTitle className="text-base">
+                {item.template.titleVi}
+              </CardTitle>
             </div>
           </CardHeader>
           <CardContent>
@@ -139,6 +183,30 @@ export function ReportDetail({ report }: { report: Report }) {
           </CardContent>
         </Card>
       ))}
+
+      {/* PY-09 ~ PY-11: Qualitative flow read-only display */}
+      {qualitativeItems.length > 0 && (
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline">PY-09 ~ PY-11</Badge>
+              <CardTitle className="text-base flex-1">
+                Đánh giá định tính (Điều 55.9 ~ 55.11)
+              </CardTitle>
+            </div>
+            <CardDescription>
+              Khó khăn, vướng mắc — Đề xuất giải pháp — Kiến nghị điều chỉnh
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <FormPY09to11Qualitative
+              items={qualitativeFlowItems}
+              onChange={() => {}}
+              readOnly={true}
+            />
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
