@@ -45,6 +45,7 @@ interface ReportListProps {
 
 export function ReportList({ initialReports }: ReportListProps) {
   const t = useTranslations("reports");
+  const tc = useTranslations("common");
   const locale = useLocale();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -124,7 +125,7 @@ export function ReportList({ initialReports }: ReportListProps) {
               <TableHead className="w-[40%]">{t("reportTitle")}</TableHead>
               <TableHead>{t("plan")}</TableHead>
               <TableHead>{t("type")}</TableHead>
-              <TableHead>{t("common.status") ?? "Trạng thái"}</TableHead>
+              <TableHead>{tc("status")}</TableHead>
               <TableHead className="text-right">{t("evaluationItems")}</TableHead>
             </TableRow>
           </TableHeader>
