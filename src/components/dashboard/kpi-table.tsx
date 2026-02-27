@@ -7,9 +7,9 @@ interface TargetStat {
 }
 
 const TYPE_LABELS: Record<string, string> = {
-  QUANTITATIVE: "\u0110\u1ecbnh l\u01b0\u1ee3ng",
-  QUALITATIVE: "\u0110\u1ecbnh t\u00ednh",
-  MILESTONE: "M\u1ed1c quan tr\u1ecdng",
+  QUANTITATIVE: "Định lượng",
+  QUALITATIVE: "Định tính",
+  MILESTONE: "Mốc quan trọng",
 };
 
 const TYPE_COLORS: Record<string, string> = {
@@ -33,7 +33,7 @@ export function KpiTable({ targetStats, totalTargets, title }: KpiTableProps) {
       <CardContent>
         {targetStats.length === 0 ? (
           <p className="text-sm text-muted-foreground text-center py-8">
-            Ch\u01b0a c\u00f3 ch\u1ec9 ti\u00eau n\u00e0o
+            Chưa có chỉ tiêu nào
           </p>
         ) : (
           <div className="space-y-3">
@@ -48,7 +48,7 @@ export function KpiTable({ targetStats, totalTargets, title }: KpiTableProps) {
               </div>
             ))}
             <div className="border-t pt-3 flex items-center justify-between">
-              <span className="text-sm font-medium">T\u1ed5ng c\u1ed9ng</span>
+              <span className="text-sm font-medium">Tổng cộng</span>
               <span className="text-sm font-mono font-bold tabular-nums">
                 {totalTargets.toLocaleString()}
               </span>

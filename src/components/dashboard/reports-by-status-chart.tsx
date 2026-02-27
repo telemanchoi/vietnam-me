@@ -18,11 +18,11 @@ interface StatusData {
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  DRAFT: "D\u1ef1 th\u1ea3o",
-  SUBMITTED: "\u0110\u00e3 g\u1eedi",
-  UNDER_REVIEW: "\u0110ang xem x\u00e9t",
-  APPROVED: "\u0110\u00e3 ph\u00ea duy\u1ec7t",
-  RETURNED: "Tr\u1ea3 l\u1ea1i",
+  DRAFT: "Dự thảo",
+  SUBMITTED: "Đã gửi",
+  UNDER_REVIEW: "Đang xem xét",
+  APPROVED: "Đã phê duyệt",
+  RETURNED: "Trả lại",
 };
 
 const STATUS_COLORS: Record<string, string> = {
@@ -52,7 +52,7 @@ export function ReportsByStatusChart({ data, title }: ReportsByStatusChartProps)
           <CardTitle className="text-base">{title}</CardTitle>
         </CardHeader>
         <CardContent className="h-[300px] flex items-center justify-center text-muted-foreground">
-          Ch\u01b0a c\u00f3 d\u1eef li\u1ec7u
+          Chưa có dữ liệu
         </CardContent>
       </Card>
     );

@@ -33,13 +33,13 @@ export default async function DashboardPage({ params }: Props) {
           icon={ClipboardList}
         />
         <StatCard
-          title="Ch\u1ec9 ti\u00eau"
+          title="Chỉ tiêu"
           value={stats.totalTargets.toLocaleString()}
           icon={Target}
         />
         <StatCard
-          title="C\u01a1 quan"
-          value={stats.plansByStatus.length > 0 ? `${stats.plansByStatus.length} tr\u1ea1ng th\u00e1i` : "\u2014"}
+          title="Cơ quan"
+          value={stats.plansByStatus.length > 0 ? `${stats.plansByStatus.length} trạng thái` : "—"}
           icon={Building2}
         />
       </div>
@@ -61,7 +61,7 @@ export default async function DashboardPage({ params }: Props) {
       <KpiTable
         targetStats={stats.targetStats}
         totalTargets={stats.totalTargets}
-        title="Ph\u00e2n lo\u1ea1i ch\u1ec9 ti\u00eau"
+        title="Phân loại chỉ tiêu"
       />
     </div>
   );

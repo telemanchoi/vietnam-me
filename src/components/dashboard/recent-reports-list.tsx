@@ -42,7 +42,7 @@ export function RecentReportsList({ reports, title, locale }: RecentReportsListP
       <CardContent>
         {reports.length === 0 ? (
           <p className="text-sm text-muted-foreground text-center py-8">
-            Ch\u01b0a c\u00f3 b\u00e1o c\u00e1o n\u00e0o
+            Chưa có báo cáo nào
           </p>
         ) : (
           <div className="space-y-3">
@@ -56,7 +56,7 @@ export function RecentReportsList({ reports, title, locale }: RecentReportsListP
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium line-clamp-1">{report.title}</p>
                   <p className="text-xs text-muted-foreground line-clamp-1">
-                    {report.plan?.nameVi ?? "\u2014"}
+                    {report.plan?.nameVi ?? "—"}
                   </p>
                 </div>
                 <Badge
