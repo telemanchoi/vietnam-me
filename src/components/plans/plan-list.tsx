@@ -47,6 +47,31 @@ const LEVEL_COLORS: Record<string, string> = {
   SECTOR: "bg-teal-100 text-teal-700",
 };
 
+/** Format plan name for display. If nameVi starts with "[Parsed]", show document number + province instead */
+function formatPlanName(plan: Plan): { title: string; subtitle?: string } {
+  const raw = plan.nameVi;
+  if (!raw.startsWith("[Parsed]")) {
+    return { title: raw, subtitle: plan.document?.documentNumber };
+  }
+  // "[Parsed] 1579/QĐ-TTg (Phu Tho)" → extract docNumber and province
+  const afterPrefix = raw.replace("[Parsed]", "").trim();
+  const docNumber = plan.document?.documentNumber ?? afterPrefix;
+  // Try to extract province from parentheses
+  const provinceMatch = afterPrefix.match(/\(([^)]+)\)/);
+  const province = provinceMatch?.[1];
+
+  if (province) {
+    return {
+      title: `Quy hoạch ${province}`,
+      subtitle: docNumber,
+    };
+  }
+  return {
+    title: docNumber,
+    subtitle: undefined,
+  };
+}
+
 interface PlanListProps {
   initialPlans: Plan[];
 }
@@ -130,15 +155,15 @@ export function PlanList({ initialPlans }: PlanListProps) {
       </p>
 
       {/* Plan Table */}
-      <Card>
+      <Card className="overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[45%]">{t("table.name")}</TableHead>
-              <TableHead>{t("table.type")}</TableHead>
-              <TableHead>{t("table.period")}</TableHead>
-              <TableHead>{t("table.status")}</TableHead>
-              <TableHead className="text-right">{t("table.sections")}</TableHead>
+              <TableHead className="min-w-[200px]">{t("table.name")}</TableHead>
+              <TableHead className="whitespace-nowrap">{t("table.type")}</TableHead>
+              <TableHead className="whitespace-nowrap">{t("table.period")}</TableHead>
+              <TableHead className="whitespace-nowrap">{t("table.status")}</TableHead>
+              <TableHead className="text-right whitespace-nowrap">{t("table.sections")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -149,20 +174,22 @@ export function PlanList({ initialPlans }: PlanListProps) {
                 </TableCell>
               </TableRow>
             ) : (
-              filtered.map((plan) => (
+              filtered.map((plan) => {
+                const { title, subtitle } = formatPlanName(plan);
+                return (
                 <TableRow key={plan.id} className="group">
-                  <TableCell>
+                  <TableCell className="max-w-[400px]">
                     <Link
                       href={`/${locale}/plans/${plan.id}`}
                       className="flex items-center gap-2 font-medium hover:underline"
                     >
                       <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
-                      <span className="line-clamp-2">{plan.nameVi}</span>
+                      <span className="line-clamp-1">{title}</span>
                       <ChevronRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                     </Link>
-                    {plan.document?.documentNumber && (
+                    {subtitle && (
                       <span className="text-xs text-muted-foreground ml-6">
-                        {plan.document.documentNumber}
+                        {subtitle}
                       </span>
                     )}
                   </TableCell>
@@ -185,7 +212,8 @@ export function PlanList({ initialPlans }: PlanListProps) {
                     {plan.document?._count?.sections ?? 0}
                   </TableCell>
                 </TableRow>
-              ))
+                );
+              })
             )}
           </TableBody>
         </Table>
