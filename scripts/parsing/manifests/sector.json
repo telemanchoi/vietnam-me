@@ -1,0 +1,168 @@
+{
+  "baseDir": "/Users/teleman/Documents/Vietnam_M&E/베트남 국가계획/39개 Sector's 계획 /",
+  "defaultType": "QUYET_DINH",
+  "defaultLevel": "SECTOR",
+  "defaultBody": "Thủ tướng Chính phủ",
+  "files": [
+    {
+      "file": "1. APPROVING THE ROAD NETWORK PLANNING FOR THE PERIOD 2021-2030, WITH A VISION TO 2050_1454_QD-TTg_486651.pdf",
+      "number": "1454/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "2. APPROVING THE RAILWAY NETWORK PLANNING FOR THE PERIOD 2021 - 2030, WITH A VISION TO 20501769_QD-TTg_491714.doc",
+      "number": "1769/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "3. Approving the Master Plan for the development of Vietnam's seaport system for the period 2021 - 2030, with a vision to 2050_1579.signed.pdf",
+      "number": "1579/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "4. APPROVING THE MASTER PLAN FOR DEVELOPMENT OF THE NATIONAL AIRPORT SYSTEM FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2050_648_QD-TTg_568857.doc",
+      "number": "648/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "5. Approval of the Inland Waterway Infrastructure Planning for the 2021 - 2030 period, with a vision to 2050_1829.signed.pdf",
+      "number": "1829/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "6. Approving the National Hydrometeorological Station Network Planning for the 2021 - 2030 period, with a vision to 2050_289-ttg.signed.pdf",
+      "number": "289/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "7. APPROVING THE NATIONAL ENERGY MASTER PLANNING FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2050_893_QD-TTg_573960.pdf",
+      "number": "893/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "8. APPROVING THE NATIONAL POWER DEVELOPMENT PLANNING FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2050_500_QD-TTg_566461.doc",
+      "number": "500/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "9. APPROVING THE NATIONAL OIL AND GAS RESERVE INFRASTRUCTURE PLANNING FOR THE 2021-2030 PERIOD, WITH A VISION TO 2050_861_QD-TTg_572833.doc",
+      "number": "861/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "10. Approving the Information and Communications Infrastructure Planning for the 2021 - 2030 period, with a vision to 2050_36-ttg.signed.pdf",
+      "number": "36/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "12. Approving the Planning for Natural Disaster Prevention and Control and Irrigation for the 2021-2030 period, with a vision to 2050_847-ttg.signed.pdf",
+      "number": "847/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "13. APPROVING TOURISM SYSTEM PLANNING FOR THE PERIOD 2021-2030, WITH A VISION TO 2045_509_QD-TTg_613477.doc",
+      "number": "509/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "14. Approving the Planning of the cultural and sports facilities network for the period 2021 - 2030, with a vision to 2045_991-ttg.signed.pdf",
+      "number": "991/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "15. Approving the Planning of the network of public science and technology organizations for the period 2021 - 2030, with a vision to 2050_229-ttg.signed.pdf",
+      "number": "229/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "16. Approving the Planning of the network of higher education and pedagogical institutions for the period 2021 - 2030, with a vision to 2050_452qd-ttg27022025-signed.pdf",
+      "number": "452/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "18. APPROVING THE NETWORK PLAN OF VOCATIONAL EDUCATION INSTITUTIONS FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2045_73_QD-TTg_554064.doc",
+      "number": "73/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "19. Approving the Social Assistance Facility Network Planning for the 2021 - 2030 period, with a vision to 2050_966-ttg.signed.pdf",
+      "number": "966/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "20. Approving the Planning of the system of social facilities for nurturing and caring for people with revolutionary contributions for the period 2021 - 2030, with a vision to 2050_1007-ttg.signed.pdf",
+      "number": "1007/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "21. On approving the Planning of fishing port system and storm shelters for fishing vessels for the period 2021 - 2030, with a vision to 2050_582-ttg.signed.pdf",
+      "number": "582/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "22. APPROVING THE MEDICAL FACILITY NETWORK PLANNING FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2050_201_QD-TTg_600389.doc",
+      "number": "201/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "25. Approval of Fire Prevention and Fighting Infrastructure Planning for the 2021 - 2030 period, with a vision to 2050_819_qd-ttg_07072023-signed.pdf",
+      "number": "819/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "26. APPROVING THE PLANNING OF URBAN AND RURAL SYSTEMS FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2050_891_QD-TTg_622367.doc",
+      "number": "891/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "27. Approving the Planning of the system of national defense and security education centers for the period 2021 - 2030, with a vision to 2045_1573-ttg.signed.pdf",
+      "number": "1573/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "28. Approving the Master Plan for sustainable exploitation and use of coastal resources for the period 2021 - 2030, with a vision to 2050_1117-ttg.signed.pdf",
+      "number": "1117/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "29. Approving the Plan for basic geological survey of minerals for the period 2021 - 2030, with a vision to 2050_680-ttg.signed.pdf",
+      "number": "680/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "30. Approval of Water Resources Planning for the period 2021 - 2030, vision to 2050_1622ttg.signed.pdf",
+      "number": "1622/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "32. APPROVING THE PLANNING FOR EXPLORATION, EXPLOITATION, PROCESSING AND USE OF MINERALS FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2050_866_QD-TTg_573087.doc",
+      "number": "866/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "33. Approving the Planning for exploration, exploitation, processing and use of minerals as construction materials for the period 2021 - 2030, with a vision to 2050_1626ttg.signed.pdf",
+      "number": "1626/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "34. APPROVAL OF NATIONAL FORESTRY PLANNING FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2050_895_QD-TTg_622482.doc",
+      "number": "895/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "35. Approving the Planning for Protection and Exploitation of Aquatic Resources for the 2021 - 2030 Period, with a Vision to 2050_389-ttg.signed.pdf",
+      "number": "389/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "38. APPROVING THE NATIONAL ENVIRONMENTAL PROTECTION PLANNING FOR THE PERIOD 2021 - 2030, WITH A VISION TO 2050_611_QD-TTg_616499.pdf",
+      "number": "611/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "39. Approval of the National Biodiversity Conservation Plan for the 2021 - 2030 period, with a vision to 2050_1352-ttg.signed.pdf",
+      "number": "1352/QĐ-TTg",
+      "date": "2023-01-01"
+    }
+  ]
+}

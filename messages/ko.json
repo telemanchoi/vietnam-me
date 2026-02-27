@@ -1,0 +1,126 @@
+{
+  "common": {
+    "appName": "베트남 M&E 시스템",
+    "dashboard": "대시보드",
+    "plans": "계획",
+    "reports": "평가보고서",
+    "save": "저장",
+    "cancel": "취소",
+    "submit": "제출",
+    "edit": "수정",
+    "delete": "삭제",
+    "search": "검색",
+    "loading": "로딩 중...",
+    "noData": "데이터 없음",
+    "error": "오류가 발생했습니다",
+    "back": "뒤로",
+    "create": "새로 만들기",
+    "status": "상태",
+    "actions": "작업",
+    "all": "전체"
+  },
+  "dashboard": {
+    "title": "대시보드",
+    "totalPlans": "전체 계획 수",
+    "totalReports": "전체 보고서 수",
+    "recentReports": "최근 보고서",
+    "reportsByStatus": "상태별 보고서"
+  },
+  "plans": {
+    "title": "계획 목록",
+    "description": "분석 및 저장된 계획 목록",
+    "searchPlaceholder": "이름 또는 문서번호로 검색...",
+    "allStatuses": "전체 상태",
+    "allLevels": "전체 급",
+    "resultCount": "{count}개 계획",
+    "noResults": "계획을 찾을 수 없습니다",
+    "table": {
+      "name": "계획명",
+      "type": "유형",
+      "period": "기간",
+      "status": "상태",
+      "sections": "항목 수"
+    },
+    "status": {
+      "DRAFT": "초안",
+      "APPROVED": "승인됨",
+      "IN_PROGRESS": "진행 중",
+      "COMPLETED": "완료"
+    },
+    "level": {
+      "NATIONAL": "국가",
+      "REGIONAL": "지역",
+      "PROVINCE": "성/시",
+      "SECTOR": "분야"
+    },
+    "detail": {
+      "organization": "기관",
+      "document": "문서",
+      "totalSections": "개 항목",
+      "stats": "통계",
+      "childPlans": "개 하위 계획",
+      "reports": "개 보고서",
+      "noDocument": "분석된 문서가 없습니다",
+      "loading": "로딩 중...",
+      "noTargets": "목표/지표가 없습니다",
+      "noAppendices": "부록이 없습니다"
+    },
+    "tabs": {
+      "sections": "내용",
+      "targets": "지표",
+      "appendices": "부록"
+    },
+    "targets": {
+      "name": "지표명",
+      "type": "유형",
+      "value": "값",
+      "section": "항목"
+    }
+  },
+  "reports": {
+    "title": "평가보고서 목록",
+    "newReport": "새 보고서 작성",
+    "editReport": "보고서 수정",
+    "reportDetail": "보고서 상세",
+    "selectPlan": "계획 선택",
+    "selectType": "평가 유형 선택",
+    "reportTitle": "보고서 제목",
+    "periodic": "정기평가 (5년)",
+    "adHoc": "수시평가",
+    "periodStart": "평가 시작일",
+    "periodEnd": "평가 종료일",
+    "evaluationItems": "평가 내용",
+    "plan": "계획",
+    "organization": "기관",
+    "type": "평가 유형",
+    "allTypes": "전체 유형",
+    "allStatuses": "전체 상태",
+    "noReports": "보고서가 없습니다",
+    "saveSuccess": "보고서가 저장되었습니다",
+    "saveError": "보고서 저장 중 오류가 발생했습니다",
+    "deleteConfirm": "이 보고서를 삭제하시겠습니까?",
+    "showPlanReference": "관련 계획 내용 표시",
+    "hidePlanReference": "관련 계획 내용 숨기기",
+    "searchPlaceholder": "보고서 검색...",
+    "save": "저장",
+    "cancel": "취소",
+    "itemPlaceholder": "평가 내용을 입력하세요...",
+    "status": {
+      "DRAFT": "초안",
+      "SUBMITTED": "제출됨",
+      "UNDER_REVIEW": "검토 중",
+      "APPROVED": "승인됨",
+      "RETURNED": "반려됨"
+    }
+  },
+  "evaluation": {
+    "relatedPlanContent": "관련 계획 내용",
+    "matchingSections": "관련 항목",
+    "noMatchingSections": "관련 항목을 찾을 수 없습니다",
+    "showPlanReference": "계획 참조 표시",
+    "hidePlanReference": "계획 참조 숨기기",
+    "matchedKeywords": "매칭 키워드",
+    "planTargets": "계획 목표",
+    "planAppendices": "계획 부록"
+  }
+}

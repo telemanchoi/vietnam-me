@@ -1,0 +1,323 @@
+{
+  "baseDir": "/Users/teleman/Documents/Vietnam_M&E/베트남 국가계획/63개 성시의 MP/",
+  "defaultType": "QUYET_DINH",
+  "defaultLevel": "PROVINCE",
+  "defaultBody": "Thủ tướng Chính phủ",
+  "files": [
+    {
+      "file": "1. Long An Province's MP_686_QD-TTg_569461.doc",
+      "number": "686/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "2. Quang Binh Province's MP_377_QD-TTg_563045.doc",
+      "number": "377/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "3. Tuyen Quang Province's MP_325_QD-TTg_561507.doc",
+      "number": "325/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "4. Lao Cai Province's MP_316_QD-TTg_561276.doc",
+      "number": "316/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "5. Khanh Hoa Province's MP_318_QD-TTg_561074.doc",
+      "number": "318/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "6. Thai Nguyen Province's MP_222_QD-TTg_559406.doc",
+      "number": "222/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "7. Thanh Hoa Province' MP_153_QD-TTg_556773.doc",
+      "number": "153/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "8. Quang Ninh Province's MP_80_QD-TTg_554203.doc",
+      "number": "80/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "9. Ha Tinh Province's MP_1363_QD-TTg_537368.doc",
+      "number": "1363/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "10. Bac Giang Province's MP_219_QD-TTg_503751.doc",
+      "number": "219/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "11. Soc Trang Province's MP_995_QD-TTg_576902.doc",
+      "number": "995/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "12. Nghe An Province's MP_1059_QD-TTg_579227.doc",
+      "number": "1059/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "13. Yen Bai Province's MP_1086_QD-TTg_579516.doc",
+      "number": "1086/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "14. Tra Vinh Province's MP_1142_QD-TTg_580924.doc",
+      "number": "1142/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "15. Da Nang City's MP_1287_QD-TTg_584918.doc",
+      "number": "1287/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "16. Bac Kan Province's MP_1288_QD-TTg_585100.doc",
+      "number": "1288/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "17. Kien Giang Province's MP_1289_QD-TTg_585271.doc",
+      "number": "1289/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "18. Ninh Thuan Province's MP_1319_QD-TTg_586093.doc",
+      "number": "1319/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "19. Ha Giang Province's MP_1339_QD-TTg_586328.doc",
+      "number": "1339/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "20. An Giang Province's MP_1369_QD-TTg_586764.doc",
+      "number": "1369/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "21. Ca Mau Province's MP_1386_QD-TTg_587018.doc",
+      "number": "1386/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "22. Ben Tre Province's MP_1399_QD-TTg_587222.doc",
+      "number": "1399/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "23. Quang Ngai Province's MP_1456_QD-TTg_587570.doc",
+      "number": "1456/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "24. Cao Bang Province's MP_1486_QD-TTg_587846.doc",
+      "number": "1486/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "25. Binh Phuoc Province's MP_1489_QD-TTg_587880.doc",
+      "number": "1489/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "26. Hai Phong City's MP_1516_QD-TTg_588978.doc",
+      "number": "1516/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "27. Can Tho City's MP_1519_QD-TTg_588979.doc",
+      "number": "1519/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "28. Phu Tho Province's MP_1579_QD-TTg_589392.doc",
+      "number": "1579/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "29. Hau Giang Province's MP_1588_QD-TTg_590022.doc",
+      "number": "1588/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "30. Bac Ninh Province's MP_1589_QD-TTg_590023.doc",
+      "number": "1589/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "31. Binh Dinh Province's MP_1619_QD-TTg_591839.doc",
+      "number": "1619/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "32. Ba Ria Vung Tau Province's MP_1629_QD-TTg_590906.doc",
+      "number": "1629/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "33. Hai Duong Province's MP_1639_QD-TTg_591440.doc",
+      "number": "1639/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "34. Hoa Binh Province's MP_1648_QD-TTg_592451.doc",
+      "number": "1648/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "35. Son La Province's MP_1676_QD-TTg_592344.doc",
+      "number": "1676/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "36. Ha Nam Province's MP_1686_QD-TTg_592532.doc",
+      "number": "1686/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "37. Binh Thuan Province's MP_1701_QD-TTg_592854.doc",
+      "number": "1701/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "38. Nam Dinh Province's MP_1729_QD-TTg_593226.doc",
+      "number": "1729/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "39. Thai Binh Province's MP_1735_QD-TTg_593437.doc",
+      "number": "1735/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "40. Tay Ninh Province's MP_1736_QD-TTg_593689.doc",
+      "number": "1736/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "41. Quang Tri Province's MP_1737_QD-TTg_593222.doc",
+      "number": "1737/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "42. Phu Yen Province's MP_1746_QD-TTg_593344.doc",
+      "number": "1746/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "43. Dak Lak Province's MP_1747_QD-TTg_593416.doc",
+      "number": "1747/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "44. Kon Tum Province's MP_1756_QD-TTg_593770.doc",
+      "number": "1756/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "45. Dak Nong Province's MP_1757_QD-TTg_593771.doc",
+      "number": "1757/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "46. Vinh Long Province's MP_1759_QD-TTg_594902.doc",
+      "number": "1759/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "47. Tien Giang Province's MP_1762_QD-TTg_594456.doc",
+      "number": "1762/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "48. Gia Lai Province's MPI_1750_QD-TTg_594455.doc",
+      "number": "1750/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "49. Thua Thien Hue City's MP_1745_QD-TTg_594454.doc",
+      "number": "1745/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "50. Lam Dong Province's MP_1727_QD-TTg_594452.doc",
+      "number": "1727/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "51. Dong Thap Province's MP__39_QD-TTg_595430.doc",
+      "number": "39/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "52. Quang Nam Province's MP_72_QD-TTg_596146.doc",
+      "number": "72/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "53. Vinh Phuc Province's MP_158_QD-TTg_598454.doc",
+      "number": "158/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "54. Ninh Binh Province's MP_218_QD-TTg_600803.doc",
+      "number": "218/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "55. Lang Son Province's MP_236_QD-TTg_602729.doc",
+      "number": "236/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "56. Dien Bien Province's MP_109_QD-TTg_597263.doc",
+      "number": "109/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "57. Hung Yen Province's MP_489_QD-TTg_613146.doc",
+      "number": "489/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "58. Dong Nai Province's MP_586_QD-TTg_616039.doc",
+      "number": "586/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "59. Bac Lieu Province's MP_1598_QD-TTg_591407.doc",
+      "number": "1598/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "60. Lai Chau Province's MP_1585_QD-TTg_590767.doc",
+      "number": "1585/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "61. Binh Duong Province's MP_790_QD-TTg_620054.doc",
+      "number": "790/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "62. Ha Noi Capital's MP_1569_QD-TTg_635704.doc",
+      "number": "1569/QĐ-TTg",
+      "date": "2023-01-01"
+    },
+    {
+      "file": "63. Ho Chi Minh City's MP_1711_QD-TTg_638226.doc",
+      "number": "1711/QĐ-TTg",
+      "date": "2023-01-01"
+    }
+  ]
+}

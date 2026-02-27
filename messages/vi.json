@@ -1,0 +1,126 @@
+{
+  "common": {
+    "appName": "Hệ thống M&E Quy hoạch",
+    "dashboard": "Bảng điều khiển",
+    "plans": "Quy hoạch",
+    "reports": "Báo cáo đánh giá",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "submit": "Gửi",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "search": "Tìm kiếm",
+    "loading": "Đang tải...",
+    "noData": "Không có dữ liệu",
+    "error": "Có lỗi xảy ra",
+    "back": "Quay lại",
+    "create": "Tạo mới",
+    "status": "Trạng thái",
+    "actions": "Thao tác",
+    "all": "Tất cả"
+  },
+  "dashboard": {
+    "title": "Bảng điều khiển",
+    "totalPlans": "Tổng số quy hoạch",
+    "totalReports": "Tổng số báo cáo",
+    "recentReports": "Báo cáo gần đây",
+    "reportsByStatus": "Báo cáo theo trạng thái"
+  },
+  "plans": {
+    "title": "Danh sách Quy hoạch",
+    "description": "Danh sách các quy hoạch đã được phân tích và lưu trữ",
+    "searchPlaceholder": "Tìm kiếm theo tên hoặc số hiệu văn bản...",
+    "allStatuses": "Tất cả trạng thái",
+    "allLevels": "Tất cả cấp",
+    "resultCount": "{count} quy hoạch",
+    "noResults": "Không tìm thấy quy hoạch nào",
+    "table": {
+      "name": "Tên quy hoạch",
+      "type": "Loại",
+      "period": "Thời kỳ",
+      "status": "Trạng thái",
+      "sections": "Số mục"
+    },
+    "status": {
+      "DRAFT": "Dự thảo",
+      "APPROVED": "Đã phê duyệt",
+      "IN_PROGRESS": "Đang thực hiện",
+      "COMPLETED": "Hoàn thành"
+    },
+    "level": {
+      "NATIONAL": "Quốc gia",
+      "REGIONAL": "Vùng",
+      "PROVINCE": "Tỉnh",
+      "SECTOR": "Ngành"
+    },
+    "detail": {
+      "organization": "Cơ quan",
+      "document": "Văn bản",
+      "totalSections": "mục",
+      "stats": "Thống kê",
+      "childPlans": "quy hoạch con",
+      "reports": "báo cáo",
+      "noDocument": "Chưa có văn bản phân tích",
+      "loading": "Đang tải...",
+      "noTargets": "Không có mục tiêu, chỉ tiêu",
+      "noAppendices": "Không có phụ lục"
+    },
+    "tabs": {
+      "sections": "Nội dung",
+      "targets": "Chỉ tiêu",
+      "appendices": "Phụ lục"
+    },
+    "targets": {
+      "name": "Tên chỉ tiêu",
+      "type": "Loại",
+      "value": "Giá trị",
+      "section": "Mục"
+    }
+  },
+  "reports": {
+    "title": "Danh sách Báo cáo Đánh giá",
+    "newReport": "Tạo báo cáo mới",
+    "editReport": "Sửa báo cáo",
+    "reportDetail": "Chi tiết báo cáo",
+    "selectPlan": "Chọn quy hoạch",
+    "selectType": "Chọn loại đánh giá",
+    "reportTitle": "Tiêu đề báo cáo",
+    "periodic": "Đánh giá định kỳ 5 năm",
+    "adHoc": "Đánh giá đột xuất",
+    "periodStart": "Bắt đầu kỳ",
+    "periodEnd": "Kết thúc kỳ",
+    "evaluationItems": "Nội dung đánh giá",
+    "plan": "Quy hoạch",
+    "organization": "Cơ quan",
+    "type": "Loại đánh giá",
+    "allTypes": "Tất cả loại",
+    "allStatuses": "Tất cả trạng thái",
+    "noReports": "Không có báo cáo nào",
+    "saveSuccess": "Lưu báo cáo thành công",
+    "saveError": "Lỗi khi lưu báo cáo",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa báo cáo này?",
+    "showPlanReference": "Hiện nội dung quy hoạch liên quan",
+    "hidePlanReference": "Ẩn nội dung quy hoạch",
+    "searchPlaceholder": "Tìm kiếm báo cáo...",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "itemPlaceholder": "Nhập nội dung đánh giá...",
+    "status": {
+      "DRAFT": "Dự thảo",
+      "SUBMITTED": "Đã gửi",
+      "UNDER_REVIEW": "Đang xem xét",
+      "APPROVED": "Đã phê duyệt",
+      "RETURNED": "Trả lại"
+    }
+  },
+  "evaluation": {
+    "relatedPlanContent": "Nội dung quy hoạch liên quan",
+    "matchingSections": "Mục liên quan",
+    "noMatchingSections": "Không tìm thấy mục liên quan",
+    "showPlanReference": "Hiện tham chiếu quy hoạch",
+    "hidePlanReference": "Ẩn tham chiếu quy hoạch",
+    "matchedKeywords": "Từ khóa khớp",
+    "planTargets": "Mục tiêu quy hoạch",
+    "planAppendices": "Phụ lục quy hoạch"
+  }
+}

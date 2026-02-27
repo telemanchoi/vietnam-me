@@ -1,0 +1,383 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// === Enums ===
+
+enum OrganizationType {
+  MOF
+  PROVINCE
+  MINISTRY
+}
+
+enum PlanLevel {
+  NATIONAL
+  REGIONAL
+  PROVINCE
+  SECTOR
+}
+
+enum PlanStatus {
+  DRAFT
+  APPROVED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum ReportType {
+  PERIODIC_5Y
+  AD_HOC
+}
+
+enum ReportStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  RETURNED
+}
+
+enum DocumentType {
+  NGHI_QUYET
+  QUYET_DINH
+}
+
+enum ParseStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum SectionLevel {
+  DIEU
+  ROMAN
+  ARABIC
+  LETTER
+  DASH
+}
+
+enum TargetType {
+  QUANTITATIVE
+  QUALITATIVE
+  MILESTONE
+}
+
+enum AppendixType {
+  PROJECT_LIST
+  MAP_LIST
+  INDICATOR_TABLE
+  ROUTE_TABLE
+  FACILITY_LIST
+  MIXED
+}
+
+// === Models ===
+
+model Organization {
+  id            String           @id @default(uuid()) @db.Uuid
+  nameVi        String           @map("name_vi")
+  nameEn        String?          @map("name_en")
+  type          OrganizationType
+  provinceCode  String?          @map("province_code")
+  parentId      String?          @map("parent_id") @db.Uuid
+  parent        Organization?    @relation("OrgHierarchy", fields: [parentId], references: [id])
+  children      Organization[]   @relation("OrgHierarchy")
+  plans         Plan[]
+  reports       EvaluationReport[]
+  createdAt     DateTime         @default(now()) @map("created_at")
+  updatedAt     DateTime         @updatedAt @map("updated_at")
+
+  @@map("organizations")
+}
+
+model PlanType {
+  id      String    @id @default(uuid()) @db.Uuid
+  nameVi  String    @map("name_vi")
+  nameEn  String?   @map("name_en")
+  level   PlanLevel
+  plans   Plan[]
+
+  @@map("plan_types")
+}
+
+model Plan {
+  id              String       @id @default(uuid()) @db.Uuid
+  nameVi          String       @map("name_vi")
+  nameEn          String?      @map("name_en")
+  planTypeId      String       @map("plan_type_id") @db.Uuid
+  planType        PlanType     @relation(fields: [planTypeId], references: [id])
+  periodStart     Int          @map("period_start")
+  periodEnd       Int          @map("period_end")
+  status          PlanStatus   @default(DRAFT)
+  approvedDate    DateTime?    @map("approved_date")
+  organizationId  String       @map("organization_id") @db.Uuid
+  organization    Organization @relation(fields: [organizationId], references: [id])
+  metadata        Json?
+  indicators      Indicator[]
+  reports         EvaluationReport[]
+  parentId        String?      @map("parent_id") @db.Uuid
+  parent          Plan?        @relation("PlanHierarchy", fields: [parentId], references: [id])
+  children        Plan[]       @relation("PlanHierarchy")
+  document        PlanDocument?
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([planTypeId])
+  @@index([organizationId])
+  @@index([parentId])
+  @@map("plans")
+}
+
+model Indicator {
+  id          String           @id @default(uuid()) @db.Uuid
+  planId      String           @map("plan_id") @db.Uuid
+  plan        Plan             @relation(fields: [planId], references: [id])
+  nameVi      String           @map("name_vi")
+  nameEn      String?          @map("name_en")
+  unit        String
+  targetValue Decimal?         @map("target_value")
+  category    String?
+  sector      String?
+  sortOrder   Int              @default(0) @map("sort_order")
+  values      IndicatorValue[]
+  planTargets PlanTarget[]
+
+  @@index([planId])
+  @@index([category])
+  @@map("indicators")
+}
+
+model IndicatorValue {
+  id          String    @id @default(uuid()) @db.Uuid
+  indicatorId String    @map("indicator_id") @db.Uuid
+  indicator   Indicator @relation(fields: [indicatorId], references: [id])
+  year        Int
+  actualValue Decimal?  @map("actual_value")
+  source      String?
+  reportedBy  String?   @map("reported_by") @db.Uuid
+  reportedAt  DateTime  @default(now()) @map("reported_at")
+
+  @@index([indicatorId])
+  @@index([year])
+  @@map("indicator_values")
+}
+
+model EvaluationReport {
+  id              String       @id @default(uuid()) @db.Uuid
+  planId          String       @map("plan_id") @db.Uuid
+  plan            Plan         @relation(fields: [planId], references: [id])
+  reportType      ReportType   @map("report_type")
+  title           String
+  periodStart     DateTime     @map("period_start")
+  periodEnd       DateTime     @map("period_end")
+  status          ReportStatus @default(DRAFT)
+  organizationId  String       @map("organization_id") @db.Uuid
+  organization    Organization @relation(fields: [organizationId], references: [id])
+  submittedBy     String?      @map("submitted_by") @db.Uuid
+  submittedAt     DateTime?    @map("submitted_at")
+  reviewedBy      String?      @map("reviewed_by") @db.Uuid
+  reviewedAt      DateTime?    @map("reviewed_at")
+  reviewNotes     String?      @map("review_notes")
+  deadline              DateTime? @map("deadline")
+  reminderSentAt        DateTime? @map("reminder_sent_at")
+  clarificationRequest  String?   @db.Text @map("clarification_request")
+  clarificationRespondedAt DateTime? @map("clarification_responded_at")
+  formType        String?  @map("form_type")
+  items           EvaluationItem[]
+  scores          EvaluationScore[]
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([planId])
+  @@index([organizationId])
+  @@index([createdAt])
+  @@map("evaluation_reports")
+}
+
+model EvaluationTemplate {
+  id              String     @id @default(uuid()) @db.Uuid
+  evaluationType  ReportType @map("evaluation_type")
+  itemCode        String     @map("item_code")
+  titleVi         String     @map("title_vi")
+  titleEn         String?    @map("title_en")
+  descriptionVi   String?    @map("description_vi") @db.Text
+  descriptionEn   String?    @map("description_en") @db.Text
+  sortOrder       Int        @default(0) @map("sort_order")
+  items           EvaluationItem[]
+
+  @@unique([evaluationType, itemCode])
+  @@map("evaluation_templates")
+}
+
+model EvaluationItem {
+  id          String             @id @default(uuid()) @db.Uuid
+  reportId    String             @map("report_id") @db.Uuid
+  report      EvaluationReport   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  templateId  String             @map("template_id") @db.Uuid
+  template    EvaluationTemplate @relation(fields: [templateId], references: [id])
+  content     String?            @db.Text
+  sortOrder   Int                @default(0) @map("sort_order")
+
+  @@index([reportId])
+  @@index([templateId])
+  @@map("evaluation_items")
+}
+
+model EvaluationScore {
+  id              String           @id @default(uuid()) @db.Uuid
+  reportId        String           @map("report_id") @db.Uuid
+  report          EvaluationReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  criterionCode   String           @map("criterion_code")
+  criterionNameVi String           @map("criterion_name_vi")
+  criterionNameEn String?          @map("criterion_name_en")
+  score           Decimal?         @db.Decimal(3, 1)
+  weight          Decimal          @default(1) @db.Decimal(5, 2)
+  notes           String?          @db.Text
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+
+  @@unique([reportId, criterionCode])
+  @@map("evaluation_scores")
+}
+
+model PlanDocument {
+  id              String       @id @default(uuid()) @db.Uuid
+  planId          String       @unique @map("plan_id") @db.Uuid
+  plan            Plan         @relation(fields: [planId], references: [id])
+
+  documentNumber  String       @map("document_number")
+  documentType    DocumentType @map("document_type")
+  issuingBody     String       @map("issuing_body")
+  signedBy        String?      @map("signed_by")
+  issuedDate      DateTime     @map("issued_date")
+
+  sourceFileName  String       @map("source_file_name")
+  sourceFileUrl   String?      @map("source_file_url")
+  totalPages      Int?         @map("total_pages")
+
+  parseStatus     ParseStatus  @default(PENDING) @map("parse_status")
+  parsedAt        DateTime?    @map("parsed_at")
+  parseErrors     Json?        @map("parse_errors")
+
+  metadata        Json?
+
+  sections        PlanSection[]
+  appendices      PlanAppendix[]
+
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  @@index([parseStatus])
+  @@map("plan_documents")
+}
+
+model PlanSection {
+  id            String        @id @default(uuid()) @db.Uuid
+  documentId    String        @map("document_id") @db.Uuid
+  document      PlanDocument  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  parentId      String?       @map("parent_id") @db.Uuid
+  parent        PlanSection?  @relation("SectionHierarchy", fields: [parentId], references: [id])
+  children      PlanSection[] @relation("SectionHierarchy")
+
+  level         SectionLevel
+  sectionNumber String        @map("section_number")
+  titleVi       String?       @map("title_vi")
+  titleEn       String?       @map("title_en")
+
+  contentVi     String?       @map("content_vi") @db.Text
+  contentEn     String?       @map("content_en") @db.Text
+  sortOrder     Int           @default(0) @map("sort_order")
+
+  metadata      Json?
+
+  targets       PlanTarget[]
+
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  @@index([documentId])
+  @@index([parentId])
+  @@map("plan_sections")
+}
+
+model PlanTarget {
+  id            String        @id @default(uuid()) @db.Uuid
+  sectionId     String        @map("section_id") @db.Uuid
+  section       PlanSection   @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  indicatorId   String?       @map("indicator_id") @db.Uuid
+  indicator     Indicator?    @relation(fields: [indicatorId], references: [id])
+
+  targetType    TargetType    @map("target_type")
+  nameVi        String        @map("name_vi")
+  nameEn        String?       @map("name_en")
+  unit          String?
+  targetValue   Decimal?      @map("target_value") @db.Decimal(15, 4)
+  targetYear    Int?          @map("target_year")
+  baselineValue Decimal?      @map("baseline_value") @db.Decimal(15, 4)
+  baselineYear  Int?          @map("baseline_year")
+
+  targetMin     Decimal?      @map("target_min") @db.Decimal(15, 4)
+  targetMax     Decimal?      @map("target_max") @db.Decimal(15, 4)
+
+  rawTextVi     String?       @map("raw_text_vi") @db.Text
+  sortOrder     Int           @default(0) @map("sort_order")
+
+  metadata      Json?
+
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  @@index([sectionId])
+  @@index([indicatorId])
+  @@map("plan_targets")
+}
+
+model PlanAppendix {
+  id             String        @id @default(uuid()) @db.Uuid
+  documentId     String        @map("document_id") @db.Uuid
+  document       PlanDocument  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  appendixNumber Int           @map("appendix_number")
+  titleVi        String        @map("title_vi")
+  titleEn        String?       @map("title_en")
+  appendixType   AppendixType  @map("appendix_type")
+  sortOrder      Int           @default(0) @map("sort_order")
+
+  metadata       Json?
+
+  rows           AppendixRow[]
+
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  @@index([documentId])
+  @@map("plan_appendices")
+}
+
+model AppendixRow {
+  id          String       @id @default(uuid()) @db.Uuid
+  appendixId  String       @map("appendix_id") @db.Uuid
+  appendix    PlanAppendix @relation(fields: [appendixId], references: [id], onDelete: Cascade)
+
+  rowNumber   Int          @map("row_number")
+  data        Json
+
+  projectId   String?      @map("project_id") @db.Uuid
+
+  sortOrder   Int          @default(0) @map("sort_order")
+  createdAt   DateTime     @default(now()) @map("created_at")
+
+  @@index([appendixId])
+  @@map("appendix_rows")
+}
